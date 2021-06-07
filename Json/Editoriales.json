@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Nombre": "Santillana",
+    "PorcentajeComision": 15
+  },
+  {
+    "Nombre": "Océano",
+    "PorcentajeComision": 12
+  },
+  {
+    "Nombre": "Norma",
+    "PorcentajeComision": 18
+  }
+]
