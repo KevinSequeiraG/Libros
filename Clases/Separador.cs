@@ -12,7 +12,14 @@ namespace Libros.Clases
 
         public override double CalcularCosto(double precio)
         {
-            throw new NotImplementedException();
+            if (precio >= 10000)
+            {
+                return 0;
+            }
+            else
+            {
+                return 300;
+            }
         }
     }
 }

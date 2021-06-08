@@ -11,7 +11,14 @@ namespace Libros.Clases
         public override string descripcion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override double CalcularCosto(double precio)
         {
-            throw new NotImplementedException();
+            if (precio >= 5000 )
+            {
+                return 750;
+            }
+            else
+            {
+                return 500;
+            }
         }
     }
 }
