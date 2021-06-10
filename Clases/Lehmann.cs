@@ -16,6 +16,12 @@ namespace Libros.Clases
                 return "Lehmann";
             }
         }
-        public float PorcentajeGanancia { get; }
+        public float PorcentajeGanancia
+        {
+            get
+            {
+                return 0.154f;
+            }
+        }
     }
 }

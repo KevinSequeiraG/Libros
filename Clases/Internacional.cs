@@ -17,6 +17,11 @@ namespace Libros.Clases
             }
         }
 
-        public float PorcentajeGanancia { get; }
+        public float PorcentajeGanancia {
+            get
+            {
+                return 0.167f;
+            }
+        }
     }
 }

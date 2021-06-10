@@ -8,11 +8,24 @@ namespace Libros.Clases
 {
     class Separador : Opcionales
     {
-        public override string descripcion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string descripcion
+        {
+            get
+            {
+                return "Separador de paginas";
+            }
+        }
 
         public override double CalcularCosto(double precio)
         {
-            throw new NotImplementedException();
+            if (precio >= 10000)
+            {
+                return 0;
+            }
+            else
+            {
+                return 300;
+            }
         }
     }
 }

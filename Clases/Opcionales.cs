@@ -8,7 +8,7 @@ namespace Libros.Clases
 {
     abstract class Opcionales
     {
-        abstract public string descripcion { get; set; }
+        abstract public string descripcion { get; }
         abstract public double CalcularCosto(double precio);
     }
 }

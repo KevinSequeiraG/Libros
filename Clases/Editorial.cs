@@ -10,5 +10,10 @@ namespace Libros.Clases
     {
         public string Nombre { get; set; }
         public float PorcentajeComision { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }
