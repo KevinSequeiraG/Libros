@@ -8,10 +8,16 @@ namespace Libros.Clases
 {
     class Estudiante : Opcionales
     {
-        public override string descripcion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string descripcion
+        {
+            get
+            {
+                return "Aplicar descuento de estudiante";
+            }
+        }
         public override double CalcularCosto(double precio)
         {
-            return precio * 0.05;
+            return - (precio * 0.05);
         }
     }
 }

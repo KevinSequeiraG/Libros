@@ -16,21 +16,21 @@ namespace Libros.Clases
 
         public double CalcularCosto()
         {
-            double tot = 0;
+            double totGenero = 0;
+            double totEditorial = precio * (editorial.PorcentajeComision / 100);
             switch (genero)
             {
                 case Genero.Novela:
-                    tot = precio + (precio * 0.035);
+                    totGenero = precio * 0.035;
                     break;
                 case Genero.Cuento:
-                    tot = precio + (precio * 0.047);
+                    totGenero = precio * 0.047;
                     break;
                 case Genero.Comics:
-                    tot = precio + (precio * 0.058);
+                    totGenero = precio * 0.058;
                     break;
             }
-
-            return tot + (tot * (editorial.PorcentajeComision/100));
+            return totGenero + totEditorial;
         }
     }
 }

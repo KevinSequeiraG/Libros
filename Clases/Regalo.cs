@@ -8,7 +8,11 @@ namespace Libros.Clases
 {
     class Regalo : Opcionales
     {
-        public override string descripcion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string descripcion { get
+            {
+                return "Envolver en papel de regalo";
+            }
+        }
         public override double CalcularCosto(double precio)
         {
             if (precio >= 5000 )
