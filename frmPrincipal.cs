@@ -33,50 +33,56 @@ namespace Libros
         {                             
             try
             {
-                tienda = new TiendaFactory();
-                
-                factura = new FacturaFacade();
-                factura.tienda = tienda.CrearTienda(rbtUniversal.Checked, rbtLehmann.Checked, rbtInternacional.Checked);
-                factura.AgregarCliente(txtNombre.Text, txtEmail.Text, int.Parse(mtxTelefono.Text));
-                factura.AgregarLibro(txtTitulo.Text, double.Parse(txtPrecio.Text), (Genero)cmbGenero.SelectedItem, (Editorial)cmbEditorial.SelectedItem);
-                factura.cantidad = int.Parse(nudCantidad.Value.ToString());
-                if (chkEstudiante.Checked)
+                if (EmailValido(txtEmail.Text))
                 {
-                    opc = new Estudiante();
-                    factura.AgregarOpcionales(opc);
-                }
-                if (chkRegalo.Checked)
-                {
-                    opc = new Regalo();
-                    factura.AgregarOpcionales(opc);
-                }
-                if (chkSeparador.Checked)
-                {
-                    opc = new Separador();
-                    factura.AgregarOpcionales(opc);
-                }
-                if (factura != null)
-                {
-                    saveFileDialog.Filter = "Solo XML | *.xml";
-                    DialogResult resultado = saveFileDialog.ShowDialog();
-                    if (resultado == System.Windows.Forms.DialogResult.OK)
+                    tienda = new TiendaFactory();
+
+                    factura = new FacturaFacade();
+                    factura.tienda = tienda.CrearTienda(rbtUniversal.Checked, rbtLehmann.Checked, rbtInternacional.Checked);
+                    factura.AgregarCliente(txtNombre.Text, txtEmail.Text, int.Parse(mtxTelefono.Text));
+                    factura.AgregarLibro(txtTitulo.Text, double.Parse(txtPrecio.Text), (Genero)cmbGenero.SelectedItem, (Editorial)cmbEditorial.SelectedItem);
+                    factura.cantidad = int.Parse(nudCantidad.Value.ToString());
+                    if (chkEstudiante.Checked)
                     {
-                        rutaXml = saveFileDialog.FileName;
-                        factura.Guardar(rutaXml);
-
-                        string rutaHtml = Application.StartupPath + "\\" + "factura.html";
-
-                        factura.convertToHTML(rutaXml, rutaHtml);
-
-                        // modo 1: mostrar en WebBrowser
-                        webBrowser.Url = new Uri(rutaHtml);
+                        opc = new Estudiante();
+                        factura.AgregarOpcionales(opc);
                     }
-                }
-                else
+                    if (chkRegalo.Checked)
+                    {
+                        opc = new Regalo();
+                        factura.AgregarOpcionales(opc);
+                    }
+                    if (chkSeparador.Checked)
+                    {
+                        opc = new Separador();
+                        factura.AgregarOpcionales(opc);
+                    }
+                    if (factura != null)
+                    {
+                        saveFileDialog.Filter = "Solo XML | *.xml";
+                        DialogResult resultado = saveFileDialog.ShowDialog();
+                        if (resultado == System.Windows.Forms.DialogResult.OK)
+                        {
+                            rutaXml = saveFileDialog.FileName;
+                            factura.Guardar(rutaXml);
+
+                            string rutaHtml = Application.StartupPath + "\\" + "factura.html";
+
+                            factura.convertToHTML(rutaXml, rutaHtml);
+
+                            webBrowser.Url = new Uri(rutaHtml);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Primero debe crear la orden de compra", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }else
                 {
-                    MessageBox.Show("Primero debe crear la orden de compra", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    MessageBox.Show("Error en  el correo");
+                }               
+                
             }
             catch (Exception ex)
             {
@@ -138,6 +144,22 @@ namespace Libros
                 MessageBox.Show(ex.Message);
                 throw;
             }            
+        }
+
+        private bool EmailValido(string email)
+        {
+            try
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(email, @"^(([^<>()[\]\\.,;:\s@\""]+"
+                                                    + @"(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@"
+                                                    + @"((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+                                                    + @"\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+"
+                                                    + @"[a-zA-Z]{2,}))$");
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException("validar email", e);
+            }
         }
     }
 }

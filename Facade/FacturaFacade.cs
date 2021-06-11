@@ -73,7 +73,7 @@ namespace Libros.Facade
             {
                 totTienda += item.CalcularCosto(libro.precio);
             }
-            return Math.Round((libro.precio + totTienda + libro.CalcularCosto())*cantidad);
+            return Math.Round((libro.precio + totTienda + libro.CalcularCosto())*cantidad) ;
         }
 
         public void Guardar(string ruta)
